@@ -1,5 +1,6 @@
 const initialState = {
     currentSelection: "cycling"
+    //distance: null
 };
 
 const reducer = (state = initialState, action) => {
