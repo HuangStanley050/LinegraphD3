@@ -5,7 +5,8 @@ import { distance } from "../store/actions/distance";
 class Form extends Component {
 
     state = {
-        distance: null
+        distance: ""
+
     }
 
     distanceHandler = (e) => {
@@ -17,6 +18,7 @@ class Form extends Component {
         e.preventDefault();
         //console.log(this.state.disance);
         this.props.distanceInput(this.state.distance);
+        this.setState({ distance: "" });
     }
 
     render() {
@@ -24,8 +26,8 @@ class Form extends Component {
             <div className="row">
             <form onSubmit={this.submitHandler} className="col m6 push-m3">
                 <p className="flow-text grey-text center">How much <span>{this.props.active}</span> have you done today?</p>
-                <input onChange={this.distanceHandler} type="text" value={this.state.distanceHandler} className="white-text" id={this.props.active} placeholder='Distance in kilometers' />
-                <p className="center error red-text text-lighten-1">error</p>
+                <input onChange={this.distanceHandler} type="text" value={this.state.distance} className="white-text" id={this.props.active} placeholder='Distance in meters' />
+                <p className="center error red-text text-lighten-1">{this.props.error}</p>
             </form>
             </div>
         );
@@ -34,7 +36,8 @@ class Form extends Component {
 
 const mapStateToProps = state => {
     return {
-        active: state.selection.currentSelection
+        active: state.selection.currentSelection,
+        error: state.selection.errorData
     };
 };
 

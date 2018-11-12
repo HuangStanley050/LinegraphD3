@@ -1,6 +1,6 @@
 const initialState = {
-    currentSelection: "cycling"
-    //distance: null
+    currentSelection: "cycling",
+    errorData: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +10,21 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentSelection: action.payload
             };
+        case "writeError":
+            return {
+                ...state,
+                errorData: action.payload
+            };
+        case "formError":
+            return {
+                ...state,
+                errorData: "Something wrong with the input"
+            };
+        case "writeSuccess":
+            return {
+                ...state,
+                errorData: null
+            }
         default:
             return state;
     }
