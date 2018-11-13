@@ -36,16 +36,25 @@ const drawGraph = (svgRef, data) => {
     //=======if data becomes available from props pass down from the react life cycle function
     if (data) {
         //console.log(data);
+        //==========set up x and y axis===============//
         x.domain(d3.extent(data, d => new Date(d.date)));
         y.domain([0, d3.max(data, d => d.distance)]);
 
         const xAxis = d3.axisBottom(x)
-            .ticks(5);
+            .ticks(5)
+            .tickFormat(d3.timeFormat("%b %d"));
+
         const yAxis = d3.axisLeft(y)
-            .ticks(5);
+            .ticks(5)
+            .tickFormat(d => d + 'm');
 
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
+        //rotate the text
+        xAxisGroup.selectAll('text')
+            .attr('transform', 'rotate(-40)')
+            .attr('text-anchor', 'end');
+        //===================================END====//
 
 
     }
