@@ -12,11 +12,11 @@ class Chart extends Component {
     componentDidMount() {
         //console.log(this.props.data);
         //this.drawGraph();
-        drawGraph(this.myREF);
+        drawGraph(this.myREF, this.props.data);
     }
     componentDidUpdate() {
         //console.log(this.myREF);
-        drawGraph(this.myREF);
+        drawGraph(this.myREF, this.props.data);
     }
 
     /*drawGraph = () => {
@@ -42,6 +42,10 @@ class Chart extends Component {
                 <div className="canvas">
                     <svg ref={el=>this.myREF=el}>
                      <g id="graph">
+                     <g id="xAxis">
+                     </g>
+                     <g id="yAxis">
+                     </g>
                      </g>
                     </svg>
                 </div>

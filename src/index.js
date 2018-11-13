@@ -19,11 +19,12 @@ const rootReducer = combineReducers({
     firebase: firebaseReducer
 });
 
+//change userProfile to null as no authenticaion is implemented yet
 const store = createStore(rootReducer,
     composeEnhancers(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(firebaseconfig),
         reactReduxFirebase(firebaseconfig, {
-            userProfile: 'users',
+            userProfile: null,
             useFirestoreForProfile: true
         }))
 );

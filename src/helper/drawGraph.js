@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 
-const drawGraph = (svgRef) => {
+const drawGraph = (svgRef, data) => {
+    //===============set up container
     const margin = {
         top: 40,
         right: 20,
@@ -18,8 +19,41 @@ const drawGraph = (svgRef) => {
         .attr('width', graphWidth)
         .attr('height', graphHeight)
         .attr('transform', `translate(${margin.left},${margin.top})`);
+    //============end
 
-    console.log(svg);
+    //=====set up scale and axis
+    const x = d3.scaleTime().range([0, graphWidth]);
+    const y = d3.scaleLinear().range([graphHeight, 0]);
+
+    const xAxisGroup = graph.select('#xAxis')
+        .attr('class', 'x-axis')
+        .attr('transform', `translate(0,${graphHeight})`);
+
+    const yAxisGroup = graph.select("#yAxis")
+        .attr('class', 'y-axis');
+    //===============end=============================//
+
+    //=======if data becomes available from props pass down from the react life cycle function
+    if (data) {
+        //console.log(data);
+        x.domain(d3.extent(data, d => new Date(d.date)));
+        y.domain([0, d3.max(data, d => d.distance)]);
+
+        const xAxis = d3.axisBottom(x)
+            .ticks(5);
+        const yAxis = d3.axisLeft(y)
+            .ticks(5);
+
+        xAxisGroup.call(xAxis);
+        yAxisGroup.call(yAxis);
+
+
+    }
+    else {
+        console.log("nothing yet");
+    }
+
+
 };
 
 export default drawGraph;
