@@ -39,7 +39,7 @@ const drawGraph = (svgRef, data, currentActivity) => {
         .x(function(d) { return x(new Date(d.date)) })
         .y(function(d) { return y(d.distance) });
 
-    const path = graph.append('path');
+
 
     //=======================end====================================//
 
@@ -62,12 +62,19 @@ const drawGraph = (svgRef, data, currentActivity) => {
 
         //==============set up path==========================//
 
+        const path = graph.append('path');
+
+
+        //console.log(data);
+        d3.select('path.remove').remove();
+
         path.data([data])
+            .attr('class', 'remove')
             .attr('fill', 'none')
             .attr('stroke', '#00bfa5')
             .attr('stroke-width', 2)
             .attr('d', line);
-        path.exit();
+
 
         //==================end======================================//
 

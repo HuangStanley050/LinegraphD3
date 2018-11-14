@@ -10,32 +10,15 @@ import drawGraph from "../helper/drawGraph";
 class Chart extends Component {
 
     componentDidMount() {
-        //console.log(this.props.data);
-        //this.drawGraph();
+
         drawGraph(this.myREF, this.props.data, this.props.currentActivity);
     }
     componentDidUpdate() {
-        //console.log(this.myREF);
+
         drawGraph(this.myREF, this.props.data, this.props.currentActivity);
     }
 
-    /*drawGraph = () => {
-        const margin = {
-            top: 40,
-            right: 20,
-            bottom: 50,
-            left: 100
-        };
-        const graphWidth = 560 - margin.left - margin.right;
-        const graphHeight = 400 - margin.top - margin.bottom;
 
-        let svg = d3.select(this.myREF)
-            .attr('width', graphWidth + margin.left + margin.right)
-            .attr('height', graphHeight + margin.top + margin.bottom)
-
-
-        //console.log(svg);
-    }*/
     render() {
         return (
             <div className="col s12 l6 push-l1">
