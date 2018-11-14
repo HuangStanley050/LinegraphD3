@@ -36,9 +36,30 @@ const drawGraph = (svgRef, data) => {
     //=======if data becomes available from props pass down from the react life cycle function
     if (data) {
         //console.log(data);
-        //==========set up x and y axis===============//
+        //==========set up scale domain===============//
         x.domain(d3.extent(data, d => new Date(d.date)));
         y.domain([0, d3.max(data, d => d.distance)]);
+
+        const circles = graph.selectAll('circle')
+            .data(data);
+        //=============enter, update, exit cycle=============//
+
+        //============exit stage===================================//
+        circles.exit().remove();
+        //===============end exit
+        //=======update stage=============================//
+        circles.attr('cx', d => x(new Date(d.date)))
+            .attr('cy', d => y(d.distance));
+        //==========end update===============================//
+
+        //=============enter stage
+        circles.enter()
+            .append('circle')
+            .attr('r', 4)
+            .attr('cx', d => x(new Date(d.date)))
+            .attr('cy', d => y(d.distance))
+            .attr('fill', '#ccc');
+        //==================end update cycle=======================//
 
         const xAxis = d3.axisBottom(x)
             .ticks(5)
