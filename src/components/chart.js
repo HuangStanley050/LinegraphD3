@@ -12,11 +12,11 @@ class Chart extends Component {
     componentDidMount() {
         //console.log(this.props.data);
         //this.drawGraph();
-        drawGraph(this.myREF, this.props.data);
+        drawGraph(this.myREF, this.props.data, this.props.currentActivity);
     }
     componentDidUpdate() {
         //console.log(this.myREF);
-        drawGraph(this.myREF, this.props.data);
+        drawGraph(this.myREF, this.props.data, this.props.currentActivity);
     }
 
     /*drawGraph = () => {
@@ -57,7 +57,8 @@ class Chart extends Component {
 const mapStateToProps = state => {
     //console.log(state.firestore);
     return {
-        data: state.firestore.ordered.activities
+        data: state.firestore.ordered.activities,
+        currentActivity: state.selection.currentSelection
     };
 };
 

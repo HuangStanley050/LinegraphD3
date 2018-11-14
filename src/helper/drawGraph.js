@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const drawGraph = (svgRef, data) => {
+const drawGraph = (svgRef, data, currentActivity) => {
     //===============set up container
     const margin = {
         top: 40,
@@ -35,8 +35,16 @@ const drawGraph = (svgRef, data) => {
 
     //=======if data becomes available from props pass down from the react life cycle function
     if (data) {
-        //console.log(data);
+
+
+        //filter out data base on current activity selected
+
+        data = data.filter(item => item.activity == currentActivity);
+
+
+
         //==========set up scale domain===============//
+
         x.domain(d3.extent(data, d => new Date(d.date)));
         y.domain([0, d3.max(data, d => d.distance)]);
 

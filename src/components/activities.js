@@ -9,7 +9,7 @@ const Activities = (props) => {
     const activeButton = "active";
 
     const buttonHandler = (e) => {
-        console.log(e.target.dataset.activity);
+        //console.log(e.target.dataset.activity);
         props.selectActivity(e.target.dataset.activity);
     };
 
