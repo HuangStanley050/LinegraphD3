@@ -33,20 +33,43 @@ const drawGraph = (svgRef, data, currentActivity) => {
         .attr('class', 'y-axis');
     //===============end=============================//
 
+    //=============set up line generator=======================//
+
+    const line = d3.line()
+        .x(function(d) { return x(new Date(d.date)) })
+        .y(function(d) { return y(d.distance) });
+
+    const path = graph.append('path');
+
+    //=======================end====================================//
+
     //=======if data becomes available from props pass down from the react life cycle function
     if (data) {
 
 
         //filter out data base on current activity selected
 
-        data = data.filter(item => item.activity == currentActivity);
+        data = data.filter(item => item.activity === currentActivity);
 
-
+        data.sort((a, b) => new Date(a.date) - new Date(b.date));
 
         //==========set up scale domain===============//
 
         x.domain(d3.extent(data, d => new Date(d.date)));
         y.domain([0, d3.max(data, d => d.distance)]);
+
+        //=====================end================================//
+
+        //==============set up path==========================//
+
+        path.data([data])
+            .attr('fill', 'none')
+            .attr('stroke', '#00bfa5')
+            .attr('stroke-width', 2)
+            .attr('d', line);
+        path.exit();
+
+        //==================end======================================//
 
         const circles = graph.selectAll('circle')
             .data(data);
@@ -86,11 +109,9 @@ const drawGraph = (svgRef, data, currentActivity) => {
         //===================================END====//
 
 
-    }
-    else {
-        console.log("nothing yet");
-    }
 
+
+    }
 
 };
 
