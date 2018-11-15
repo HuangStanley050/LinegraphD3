@@ -99,6 +99,23 @@ const drawGraph = (svgRef, data, currentActivity) => {
             .attr('fill', '#ccc');
         //==================end update cycle=======================//
 
+
+        //=============mouse over the circle event===============//
+        graph.selectAll('circle')
+            .on('mouseover', (d, i, n) => {
+                d3.select(n[i])
+                    .transition().duration(100)
+                    .attr('r', 8)
+                    .attr('fill', "white");
+            })
+            .on('mouseleave', (d, i, n) => {
+                d3.select(n[i])
+                    .transition().duration(100)
+                    .attr('r', 4)
+                    .attr('fill', '#ccc');
+            });
+        //========================end======================//
+
         const xAxis = d3.axisBottom(x)
             .ticks(5)
             .tickFormat(d3.timeFormat("%b %d"));
