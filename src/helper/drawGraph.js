@@ -42,9 +42,25 @@ const drawGraph = (svgRef, data, currentActivity) => {
 
 
     //=======================end====================================//
+    const dottedLines = graph.append('g')
+        .attr('class', 'lines')
+        .style('opacity', 0);
+
+    const xDottedLine = dottedLines.append('line')
+        .attr('stroke', '#aaa')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', 4);
+
+    const yDottedLine = dottedLines.append('line')
+        .attr('stroke', '#aaa')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', 4);
+
 
     //=======if data becomes available from props pass down from the react life cycle function
     if (data) {
+
+
 
 
         //filter out data base on current activity selected
@@ -65,7 +81,7 @@ const drawGraph = (svgRef, data, currentActivity) => {
         const path = graph.append('path');
 
 
-        //console.log(data);
+        //============remove the previous line===============//
         d3.select('path.remove').remove();
 
         path.data([data])
@@ -107,12 +123,30 @@ const drawGraph = (svgRef, data, currentActivity) => {
                     .transition().duration(100)
                     .attr('r', 8)
                     .attr('fill', "white");
+
+                xDottedLine
+                    .attr('x1', x(new Date(d.date)))
+                    .attr('x2', x(new Date(d.date)))
+                    .attr('y1', graphHeight)
+                    .attr('y2', y(d.distance));
+
+                yDottedLine
+                    .attr('x1', 0)
+                    .attr('x2', x(new Date(d.date)))
+                    .attr('y1', y(d.distance))
+                    .attr('y2', y(d.distance));
+
+                dottedLines.style('opacity', 1);
+
             })
             .on('mouseleave', (d, i, n) => {
                 d3.select(n[i])
                     .transition().duration(100)
                     .attr('r', 4)
                     .attr('fill', '#ccc');
+                //d3.select('line.lines').remove();
+                //d3.select(yDottedLine).remove();
+                dottedLines.style('opacity', 0);
             });
         //========================end======================//
 

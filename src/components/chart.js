@@ -29,6 +29,7 @@ class Chart extends Component {
                      </g>
                      <g id="yAxis">
                      </g>
+                     
                      </g>
                     </svg>
                 </div>
