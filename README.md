@@ -3,6 +3,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Live Site
 [Fitness App](https://fitness-chart.netlify.com)
 
+**username** test@test.com
+
+**password** test1234
+
 ## Available Scripts
 
 In the project directory, you can run:
