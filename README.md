@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Live Site
-[Fitness App](https://jolly-jones-b4cc59.netlify.com)
+[Fitness App](https://fitness-chart.netlify.com)
 
 ## Available Scripts
 
